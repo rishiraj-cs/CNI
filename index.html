@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Online Appendix — Taxonomy of CNI Disruptions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F3ED;
+    --surface:#FFFFFF;
+    --ink:#1B1B1A;
+    --ink-soft:#3A382F;
+    --ink-faint:#5F5C51;
+    --rule:#D7D2C4;
+    --rule-strong:#111111;
+    --navy:#1C2B45;
+    --navy-soft:#39496B;
+    --zebra:#FAF9F5;
+    --link:#1C2B45;
+    --link-visited:#4A3B63;
+
+    --q1:#1C2B45;  /* state / value        -- navy   */
+    --q2:#6E2C2C;  /* state / availability -- oxblood */
+    --q3:#3F4A2E;  /* other / value        -- olive-black */
+    --q4:#5A3A19;  /* other / availability -- umber  */
+
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:96px;}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",Arial,sans-serif;}
+  body{-webkit-font-smoothing:antialiased;}
+  a{color:var(--link);}
+
+  .serif{font-family:"PT Serif", Georgia, "Times New Roman", serif;}
+  .mono{font-family:"IBM Plex Mono", "Courier New", monospace;}
+
+  /* ---------------- Masthead ---------------- */
+  .masthead{border-bottom:3px double var(--rule-strong); background:var(--surface);}
+  .masthead-inner{max-width:1120px;margin:0 auto;padding:40px 28px 26px;}
+  .kicker{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:"PT Serif", Georgia, serif;
+    font-weight:700;
+    font-size:clamp(24px,3.4vw,32px);
+    line-height:1.28;
+    margin:0 0 14px;
+    max-width:56ch;
+  }
+  .subtitle{
+    font-family:"IBM Plex Sans",sans-serif;
+    font-weight:500;
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:100%;
+    margin:0 0 16px;
+    line-height:1.5;
+  }
+  .dek{
+    font-family:"PT Serif", Georgia, serif;
+    font-size:16px;
+    line-height:1.68;
+    color:var(--ink-soft);
+    max-width:100%;
+    margin:0 0 16px;
+  }
+  .cite-line{
+    font-size:12px;
+    color:var(--ink-faint);
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid var(--rule);
+    line-height:1.7;
+    max-width:100%;
+  }
+
+  /* ---------------- Figure legend ---------------- */
+  .figure-wrap{max-width:1120px;margin:30px auto 0;padding:0 28px;}
+  figcaption{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .taxonomy{
+    display:grid;
+    grid-template-columns:150px repeat(2,1fr);
+    background:var(--surface);
+    border:1px solid var(--rule-strong);
+  }
+  .tx-cell{
+    padding:14px 16px;
+    border-right:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    font-size:13px;
+    line-height:1.5;
+  }
+  .tx-cell:last-child{border-right:none;}
+  .taxonomy>.tx-cell:nth-last-child(-n+3){border-bottom:none;}
+  .tx-head{font-weight:600;background:#EFEDE4;font-size:12.5px;}
+  .tx-actor{font-weight:600;background:#EFEDE4;display:flex;align-items:center;}
+  .tx-quad{cursor:pointer;transition:background .15s ease;}
+  .tx-quad:hover{background:#F6F5EF;}
+  .tx-quad .tx-num{
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:6px;
+    border-bottom:2px solid var(--c,#000);
+    padding-bottom:4px;
+  }
+  .tx-quad .tx-desc{color:var(--ink-soft);font-family:"PT Serif",serif;}
+  .tx-q1{--c:var(--q1);} .tx-q2{--c:var(--q2);} .tx-q3{--c:var(--q3);} .tx-q4{--c:var(--q4);}
+
+  /* ---------------- Section nav ---------------- */
+  .navbar-shell{
+    position:sticky;top:0;z-index:30;
+    background:var(--bg);
+    border-bottom:1px solid var(--rule-strong);
+  }
+  .navbar{
+    max-width:1120px;margin:0 auto;padding:0 28px;
+    display:flex;gap:0;overflow-x:auto;scrollbar-width:none;
+  }
+  .navbar::-webkit-scrollbar{display:none;}
+  .navtab{
+    font-family:"IBM Plex Sans",sans-serif;
+    background:none;border:none;
+    padding:16px 22px 13px;
+    cursor:pointer;
+    white-space:nowrap;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    text-align:left;
+  }
+  .navtab .nt-roman{
+    display:block;
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    margin-bottom:3px;
+  }
+  .navtab .nt-label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+  }
+  .navtab.active{color:var(--ink);}
+  .navtab[data-q="1"].active{border-color:var(--q1);} .navtab[data-q="1"] .nt-roman{color:var(--q1);}
+  .navtab[data-q="2"].active{border-color:var(--q2);} .navtab[data-q="2"] .nt-roman{color:var(--q2);}
+  .navtab[data-q="3"].active{border-color:var(--q3);} .navtab[data-q="3"] .nt-roman{color:var(--q3);}
+  .navtab[data-q="4"].active{border-color:var(--q4);} .navtab[data-q="4"] .nt-roman{color:var(--q4);}
+
+  /* ---------------- Main / panes ---------------- */
+  main{max-width:1120px;margin:0 auto;background:var(--surface);border-left:1px solid var(--rule-strong);border-right:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);}
+  .pane{display:none;padding:30px 28px 56px;}
+  .pane.active{display:block;}
+
+  .quad-head{padding-bottom:20px;margin-bottom:6px;border-bottom:1px solid var(--rule);}
+  .quad-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+  .quad-title{font-family:"PT Serif",serif;font-weight:700;font-size:21px;margin:0 0 8px;}
+  .quad-def{font-family:"PT Serif",serif;font-size:14.5px;color:var(--ink-soft);line-height:1.65;max-width:82ch;margin:0;}
+
+  .sector-block{margin-top:26px;}
+  .sector-block:first-of-type{margin-top:0;}
+  .table-scroll{overflow-x:auto;}
+
+  table.appendix{
+    border-collapse:collapse;
+    width:100%;
+    min-width:980px;
+    font-size:13px;
+  }
+  .table-caption{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+  }
+  table.appendix thead th{
+    text-align:left;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:9px 12px;
+    border-top:2px solid var(--rule-strong);
+    border-bottom:1.5px solid var(--rule-strong);
+    background:#F7F6F1;
+  }
+  table.appendix td{
+    padding:11px 12px;
+    border-bottom:1px solid var(--rule);
+    vertical-align:top;
+    line-height:1.55;
+  }
+  table.appendix tbody tr:nth-of-type(even) td{background:var(--zebra);}
+  table.appendix tbody tr:hover td{background:#F1EFE6;}
+
+  td.c-no{font-family:"IBM Plex Mono",monospace;color:var(--ink-faint);font-size:12.5px;width:38px;}
+  td.c-sector{font-weight:600;white-space:nowrap;width:120px;color:var(--ink);}
+  td.c-incident{font-family:"IBM Plex Sans",sans-serif;font-weight:600;color:var(--ink);width:150px;}
+  td.c-date{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:12.5px;color:var(--ink);white-space:nowrap;width:96px;}
+  td.c-desc{font-family:"PT Serif",serif;font-size:14px;line-height:1.6;min-width:260px;max-width:360px;color:var(--ink);}
+  td.c-link{font-family:"IBM Plex Mono",monospace;font-size:11.5px;line-height:1.55;word-break:break-all;min-width:170px;max-width:220px;}
+  td.c-academic{font-size:12.5px;line-height:1.55;min-width:190px;max-width:260px;color:var(--ink-soft);}
+
+  td.c-link a, td.c-academic a{
+    color:var(--link);
+    text-decoration:none;
+    border-bottom:1px solid #B9C0CC;
+    word-break:break-all;
+  }
+  td.c-link a:hover, td.c-academic a:hover{background:#EEF1F6;}
+  .link-note{display:block;font-family:"IBM Plex Sans",sans-serif;font-style:italic;color:var(--ink-faint);font-size:10.5px;margin-top:3px;}
+  .cell-dash{color:var(--rule-strong);opacity:.35;}
+
+  .empty-state{padding:54px 6px 30px;max-width:64ch;}
+  .empty-state p.serif{font-size:14.5px;color:var(--ink-soft);line-height:1.7;}
+
+  footer{
+    max-width:1120px;margin:0 auto;padding:24px 28px 60px;
+    font-size:11.5px;color:var(--ink-faint);line-height:1.7;
+    border-top:1px solid var(--rule);
+  }
+
+  @media (max-width:700px){
+    .taxonomy{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <p class="kicker">Online Appendix</p>
+    <h1 class="serif">Taxonomy of CNI Disruptions</h1>
+    <p class="subtitle">Disruptions across various CNIs like Electricity, Water, Food Supply, Healthcare, Finance, etc.</p>
+    <p class="dek">This appendix generalises Figure 1 of the article. For each quadrant of the taxonomy, it reproduces the underlying case register — sector, incident type, date, description, and news links and academic references — as compiled for this study.</p>
+    <p class="cite-line">Source URLs are reproduced in full so that readers may verify provenance directly. Entries are added on a rolling basis as further quadrants are documented.</p>
+  </div>
+</div>
+
+<div class="figure-wrap">
+  <figure>
+    <figcaption>Figure 1 — click a quadrant to view its case register</figcaption>
+    <div class="taxonomy">
+      <div class="tx-cell tx-head"></div>
+      <div class="tx-cell tx-head">Degradation of CNI Value<br><span style="font-weight:400;color:var(--ink-soft);">(CNI remains operational)</span></div>
+      <div class="tx-cell tx-head">Degradation of CNI Availability<br><span style="font-weight:400;color:var(--ink-soft);">(CNI access degraded or denied)</span></div>
+
+      <div class="tx-cell tx-actor">State-authorized Actors</div>
+      <div class="tx-cell tx-quad tx-q1" data-jump="1"><span class="tx-num">Quadrant 1</span><div class="tx-desc">Favouritism, Negligence, Policy, Favouritism - Investment, Survelliance, Faster Deployment of Troops, Extortion, Partisan - Favouritism, Digital Aparthied, Dis-Information, Deep Fakes, etc.</div></div>
+      <div class="tx-cell tx-quad tx-q2" data-jump="2"><span class="tx-num">Quadrant 2</span><div class="tx-desc">Protests, Natural Disasters, Religious Ceremony, Public Order, Public Safety, Contamination, Political Rivalry, Threat, Regulatory Compliance, Shutdowns, Throttling, Blocking, Filtering, Censoring, etc.</div></div>
+
+      <div class="tx-cell tx-actor">Other Actors</div>
+      <div class="tx-cell tx-quad tx-q3" data-jump="3"><span class="tx-num">Quadrant 3</span><div class="tx-desc">Theft, Laundering, Illegal Use, For Smuggling and Human Trafficking, Extortion, Reimbursement Fraud, Prescription Fraud, Illegal Siphoning of funds, Ponzi Scheme, Digital Arrest, Illegal Online MarketPlace, Radicalisation and Terrorist Recruitment, phishing, fake news, Espionage, Spam, etc.</div></div>
+      <div class="tx-cell tx-quad tx-q4" data-jump="4"><span class="tx-num">Quadrant 4</span><div class="tx-desc">Theft of Infrastructure, Vandalism, Bombing, Inter-State Conflict, Blockade, Hoarding, Cyber-attacks, Arson-style attack on warehouse, Attack on cash machines using explosives, DDoS, Ransomware, Malware, sabotage, cyber warfare, etc.</div></div>
+    </div>
+  </figure>
+</div>
+
+<div class="navbar-shell">
+  <nav class="navbar">
+    <button class="navtab active" data-q="1"><span class="nt-roman">Quadrant I</span><span class="nt-label">State actors — Value</span></button>
+    <button class="navtab" data-q="2"><span class="nt-roman">Quadrant II</span><span class="nt-label">State actors — Availability</span></button>
+    <button class="navtab" data-q="3"><span class="nt-roman">Quadrant III</span><span class="nt-label">Other actors — Value</span></button>
+    <button class="navtab" data-q="4"><span class="nt-roman">Quadrant IV</span><span class="nt-label">Other actors — Availability</span></button>
+  </nav>
+</div>
+
+<main id="main"></main>
+
+<footer>
+  Sources are reproduced as originally reported. Inclusion here does not constitute independent verification of each claim; disputed allegations are noted as such in the case description where applicable. Academic citations are listed as supplied by the compiling researcher and should be checked against the original publication before further citation.
+</footer>
+
+<script>
+const QUADRANTS = {
+  1: {
+    tag:"q1",
+    actor:"State-authorized Actors",
+    title:"Quadrant I — Degradation of CNI Value by State Authorized Actors",
+    def:"CNI remains operational, but its value to users is degraded through state-authorized action.",
+    rows: [{"no": "1", "sector": "Electricity", "incident": "Favouritism", "date": "Nov 2025", "description": "Allegations on Romania's state-controlled Hidroelectrica over preferential electricity supply to politically linked firms.  Hidroelectrica refuted the allegations and owed the delay in billing to pandemic and multiple legislations in place.", "link1": "https://www.romania-insider.com/hidroelectrica-preferential-electricity-supply-nov-2025", "link2": "https://www.euractiv.com/news/romanian-state-owned-hydro-firm-hit-with-heavy-fine/", "link3": null, "academic": null}, {"no": null, "sector": "Electricity", "incident": "Favouritism", "date": "July 2024", "description": "Pakistan had been giving free electricity to bureaucrats, judges, parliamentarians and other officials", "link1": "https://www.dawn.com/news/1848454", "link2": "https://www.thenews.com.pk/latest/1214021-officials-including-judges-bureaucrats-lawmakers-may-lose-free-power-facility-sources", "link3": "https://tribune.com.pk/story/2483416/govt-mulls-ending-free-electricity-for-public-sector-officials", "academic": null}, {"no": null, "sector": "Electricity", "incident": "Favouritism", "date": "Nov 2025", "description": "Myanmar regime\u2019s prioritization of military zones for electrification, left major cities such as Yangon and Mandalay with around eight hours of daily electricity access. Millions in other townships suffer even worse conditions, and many areas outside the regime\u2019s territorial control have been cut off from the national grid entirely.", "link1": "https://thediplomat.com/2025/11/myanmars-power-crisis-and-energy-politics-in-the-dark/", "link2": "https://myanmar-now.org/en/news/myanmar-suffers-worsening-power-cuts-as-junta-prioritizes-military-zones/", "link3": "https://www.bnionline.net/en/news/electricity-shortages-reach-critical-levels-under-military-junta-rule", "academic": null}, {"no": "2", "sector": "Water", "incident": "Favouritism", "date": "Academic Study (1998-2014)", "description": "Pakistan ruling-party representatives used favorable irrigation water supply to benefit politically aligned regions, counteracting rainfall variability in those areas", "link1": "https://www.sciencedirect.com/science/article/pii/S0305750X18303620 Journal - World Development (ABDC- A*)", "link2": null, "link3": null, "academic": null}, {"no": null, "sector": "Water", "incident": "Favouritism", "date": "July 2017", "description": "Mexico -  Revolutionary Institutional Party, or PRI \u2013 which has long run Mexico State, and thus controlled its water supply \u2013 has turned off the water in towns whose mayors belonged to opposition parties.", "link1": "https://therevelator.org/mexico-politics-water/", "link2": "https://theconversation.com/while-mexico-plays-politics-with-its-water-some-cities-flood-and-others-go-dry-91709", "link3": "https://today.uconn.edu/2017/05/dangerous-brew-politics-water/", "academic": "Book - Herrera, Veronica. Water and politics: Clientelism and reform in urban Mexico. University of Michigan Press, 2017. Journal Article - From participatory promises to partisan capture: Local democratic transitions and Mexican water politics. Comparative Politics (ABDC - A)"}, {"no": null, "sector": "Water", "incident": "Negligence", "date": "May 2025", "description": "Canada - Indigeneous Community, Ojibway, files a lawsuit against federal government owing to its failure to provide for adequate potable water services", "link1": "https://www.cbc.ca/news/canada/thunder-bay/pikangikum-first-nation-water-wastewater-1.7533789", "link2": "https://globalnews.ca/news/11172800/ontario-first-nation-seeks-emergency-relief-in-federal-court-over-water-crisis/", "link3": "https://www.aptnnews.ca/national-news/water-infrastructure-drinking-water-first-nations-federal-government/", "academic": null}, {"no": null, "sector": "Water", "incident": "Negligence", "date": "2015-2021", "description": "United States - Flint Water Crisis. Lead Contamination. Governor's office announced the end of the pursuit of criminal charges related to the Flint water crisis after seven years without any convictions. In November 2021, federal District Court Judge Judith E. Levy approved a $626 million settlement in the case against the state of Michigan and other defendants", "link1": "https://en.wikipedia.org/wiki/Flint_water_crisis", "link2": null, "link3": null, "academic": "Journal Article - What is Flint? Place, storytelling, and social media narrative reclamation during the Flint water crisis, in Information, Communication & Society https://doi.org/10.1080/1369118X.2019.1577477"}, {"no": "3", "sector": "Food", "incident": "Favouritism", "date": "July 2019", "description": "Venezuela - The former Maduro regime created the CLAP program in 2016 for the stated purpose of providing subsidized food ration boxes to poor Venezuelans.  Rather than ensure that this vulnerable population receives the food it desperately needs, the regime uses the CLAP program as a political tool to reward support and punish political criticism.  By offering food through this program, the former regime is able to maintain its influence because many Venezuelan citizens do not have enough money to buy food and therefore depend on the rations CLAP provides to survive.", "link1": "https://www.bbc.com/news/world-latin-america-49125575", "link2": "https://home.treasury.gov/news/press-releases/sm741", "link3": "https://www.nbcnews.com/news/latino/us-targets-graft-venezuelas-flagship-food-box-program-rcna3577", "academic": "https://www.reuters.com/article/world/us-sanctions-target-food-subsidy-scam-in-venezuela-charges-businessman-idUSKCN1UK28G/"}, {"no": null, "sector": "Food", "incident": "Favouritism", "date": "November 2024", "description": "Zimbabwe - According to the Zimbabwe Election Advocacy Trust (ZEAT), government funds meant for farmers are being distributed according to political affiliation, depriving poor areas of much-needed assistance. Zanu PF has categorically rejected any misconduct in spite of the allegations.", "link1": "https://zimadvocate.com/2024/11/23/zanu-pf-faces-bias-claims-over-aid-distribution/", "link2": "https://www.theafricareport.com/346205/zimbabwe-zanu-pf-accused-of-using-food-aid-to-punish-opponents/", "link3": "https://www.voanews.com/a/zimbabwe-denies-charges-of-partisan-food-aid-distribution/3504475.html", "academic": null}, {"no": null, "sector": "Food", "incident": "Policy", "date": "Govt. Role - Indirect", "description": "United States - Food Deserts - Food deserts are areas, often in urban neighbor-hoods, that are void of fresh and healthy foods andwhere access to fresh and healthy foods is limited.More than 23.5 million Americans, including 6.5million children live in low-income urban and ruralneighborhoods that are more than one mile fromthe supermarket.", "link1": "https://theconversation.com/how-urban-planning-and-housing-policy-helped-create-food-apartheid-in-us-cities-154433", "link2": "https://dailybruin.com/2025/07/18/food-deserts-in-la-build-on-systemic-factors-create-barriers-to-healthy-eating", "link3": null, "academic": "Journal Article: Food retail and access after the crash: rethinking the food desert problem \"Journal of Economic Geography\" (ABDC - A)"}, {"no": "4", "sector": "Transport", "incident": "Favouritism - Investment", "date": "October 2022", "description": "Australia - Federal and state Liberal politicians have accused the Albanese government of \u201cplaying favourites\u201d with infrastructure spending, complaining about the allocation of funding between states. Government has denied such claims.", "link1": "https://www.theguardian.com/australia-news/2022/oct/16/liberals-accuse-albanese-government-of-playing-favourites-in-infrastructure-spending", "link2": "https://www.aph.gov.au/Parliamentary_Business/Hansard/Hansard_Display?bid=committees/estimate/26248/&sid=0000", "link3": null, "academic": null}, {"no": null, "sector": "Transport", "incident": "Favouritism", "date": "March 2024", "description": "Nigeria - Governor Chukwuma Soludo of Anambra State reveals that he initially refused to construct a road in the community because a federal lawmaker representing the area was in the opposition party.", "link1": "https://www.informationng.com/2024/03/i-didnt-repair-bad-roads-in-some-communities-because-constituents-belong-to-opposition-gov-soludo.html", "link2": "https://gazettengr.com/soludo-admits-neglecting-anambra-bad-roads-in-opposition-politicians-constituency/", "link3": "https://thecanarypost.com/anambra-governor-soludo-admits-ignoring-bad-roads-in-opposition-areas/", "academic": null}, {"no": null, "sector": "Transport", "incident": "Survelliance", "date": "May 2023", "description": "India - Unmanned Aerial Vehicles (UAV), and helicopters deployed for aerial survelliance", "link1": "https://www.indiatoday.in/india/story/manipur-violence-army-assam-rifles-tribe-status-meitei-kuki-2376576-2023-05-08", "link2": "https://www.hindustantimes.com/india-news/manipur-violence-indian-armys-aerial-surveillance-uavs-helicopters-101683963431962.html", "link3": "https://economictimes.indiatimes.com/news/india/manipur-violence-security-forces-carry-out-aerial-surveillance-along-the-indo-myanmar-border-watch/videoshow/100041289.cms?from=mdr", "academic": null}, {"no": null, "sector": "Transport", "incident": "Faster Deployment of Troops", "date": "May 2023", "description": "India - The Centre has \u201ctaken over\u201d control of security in violence-hit Manipur on Friday by deploying 12 companies, comprising around 1,000 personnel, of the Border Security Force (BSF) and airlifting anti-riot vehicles to the northeastern State", "link1": "https://www.thehindu.com/news/national/manipur-dgp-says-article-355-invoked-in-state/article66817110.ece", "link2": "https://www.thehindu.com/news/national/other-states/army-deployed-in-violence-hit-manipur-4000-people-shifted/article66810943.ece", "link3": "https://www.business-standard.com/india-news/amit-shah-reviews-manipur-situation-anti-riot-vehicles-sent-to-state-123050500925_1.html", "academic": null}, {"no": null, "sector": "Transport", "incident": "Extortion", "date": "Various Incidents", "description": "India - Shillong, Truck drivers Forced to pay extortion demanded by cops on NH-6", "link1": "https://theshillongtimes.com/2026/06/09/forced-to-pay-rs-4000-5000-per-trip-truckers-allege-extortion-by-meghalaya-cops-on-nh-6/", "link2": "https://shillongnews.com/2026/06/09/truck-drivers-allege-police-extortion-along-nh-6-checkpoints/", "link3": "https://theshillongtimes.com/2025/08/29/govt-issues-warning-against-extortion-on-nh-6/", "academic": null}, {"no": "5", "sector": "Healthcare", "incident": "Partisan - Favouritism", "date": "Academic Study", "description": "Myanmar - Dual Health System. Military-run hospitals in loyalist areas and Ethnic and Community-Based Health Organizations in anti-junta regions", "link1": "https://asiafoundation.org/wp-content/uploads/2024/08/Achieving-health-equity-in-contested-corner-of-southeast-myanmar_ENG.pdf", "link2": "https://gh.bmj.com/content/11/1/e017665 \"Newly emerged resistance healthcare systems in northwest Myanmar\u2019s Sagaing Region post-military coup: qualitative insights from anti-junta healthcare workers and community members\" BMJ Global Health", "link3": "https://pubmed.ncbi.nlm.nih.gov/39449065/ \"Assessing the role of non-state actors in health service delivery and health system resilience in Myanmar\"", "academic": "https://www.sciencedirect.com/science/article/pii/S2949856226000437"}, {"no": null, "sector": "Healthcare", "incident": "Favouritism", "date": "Academic Study", "description": "Lebanon - Individuals with higher political activism have better access to health services than others.", "link1": "https://link.springer.com/article/10.1186/1475-9276-11-23 \"International Journal of Equity in Health\"", "link2": null, "link3": null, "academic": null}, {"no": null, "sector": "Healthcare", "incident": "Favouritism", "date": "Academic Study", "description": "India - governments tend to expand or target health spending where it helps them win or retain power", "link1": "https://www.sciencedirect.com/science/article/pii/S0305750X22000109  (World Development - ABDC- A*)", "link2": null, "link3": null, "academic": null}, {"no": "6", "sector": "Financial Institutions", "incident": "Favouritism", "date": "Academic Study", "description": "Brazil - Political Connections gives Preferential access to finance", "link1": "https://www.sciencedirect.com/science/article/pii/S0304405X07001353 \"Political connections and preferential access to finance: The role of campaign contributions\" (ABDC_ A*)", "link2": null, "link3": null, "academic": null}, {"no": null, "sector": "Financial Institutions", "incident": "Favouritism", "date": "Academic Study", "description": "Taiwan", "link1": "The Benefits of Political Connection: Evidence from Individual Bank-Loan Contracts https://link.springer.com/article/10.1007/s10693-013-0167-1", "link2": null, "link3": null, "academic": null}, {"no": null, "sector": "Financial Institutions", "incident": "Favouritism", "date": "Academic Study", "description": "Study from 35 countries", "link1": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1540-6261.2006.01000.x Political Connections and Corporate Bailouts", "link2": null, "link3": null, "academic": null}, {"no": "7", "sector": "Internet", "incident": "Favouritism", "date": "March 2026", "description": "Iran - ran\u2019s government said on Tuesday that it is providing special internet access to select users capable of promoting its messaging online, even as the country remains under what monitoring groups call one of the most severe nationwide internet shutdowns ever recorded.", "link1": "https://www.iranintl.com/en/202511288631", "link2": "https://www.indiablooms.com/world/us-slams-iran-for-allegedly-trying-to-shut-down-internet-amid-protests-spokeswoman/details", "link3": "https://www.iranintl.com/en/202603106004", "academic": null}, {"no": null, "sector": "Internet", "incident": "Digital Aparthied", "date": "July 2025", "description": "Iran - Approves Accelerated Implementation of Class-Based Internet in Iran", "link1": "https://iranfocus.com/iran/54817-approval-of-accelerated-implementation-of-class-based-internet-in-iran/", "link2": "https://niacouncil.org/iran-moves-toward-tiered-internet-access-amid-post-war-security-justifications-and-digital-regulation/", "link3": "https://en.radiozamaneh.com/37071/", "academic": null}, {"no": null, "sector": "Internet", "incident": "Dis-Information, Deep Fakes", "date": "March 2024", "description": "South Africa - Influence the elections", "link1": "https://futures.issafrica.org/blog/2024/Disinformation-governance-and-the-South-African-election", "link2": "https://journals.sagepub.com/doi/10.1177/19401612251395434", "link3": "https://iol.co.za/news/politics/2026-07-19-ai-deepfakes-fake-accounts-and-election-lies-inside-the-iecs-proposed-crackdown/", "academic": null}, {"no": null, "sector": "Internet", "incident": "Dis-Information, Deep Fakes", "date": "December 2018", "description": "United States - Trump vs Hillary Clinton -", "link1": "https://www.nbcnews.com/politics/politics-news/russia-favored-trump-targeted-african-americans-election-meddling-reports-say-n948731", "link2": "https://www.bbc.com/news/technology-46590890", "link3": "https://www.npr.org/2020/08/18/903616315/senate-releases-final-report-on-russias-interference-in-2016-election", "academic": null}, {"no": null, "sector": "Internet", "incident": "Survelliance", "date": "August 2023", "description": "India - Allegations of Indian Government using spyware Pegasus for snooping", "link1": "https://www.deccanherald.com/india/modi-govt-snooping-on-indians-using-tools-from-israeli-firms-report-2666295", "link2": "https://www.aljazeera.com/news/2023/12/28/indian-journalists-targeted-by-israeli-spyware-again-what-do-we-know", "link3": "https://www.thehindu.com/news/national/israeli-spyware-used-to-target-indian-journalists-human-rights-activists-whatsapp/article61439960.ece", "academic": null}]
+  },
+  2: {
+    tag:"q2", actor:"State-authorized Actors",
+    title:"Quadrant II — Degradation of CNI Availability by State Authorized Actors",
+    def:"CNI access is degraded or denied through state-authorized action.",
+    rows: [{"no": "1", "sector": "Energy", "incident": "Declaration of Emergency in India", "date": "June 1975", "description": "Electricity was cut off to the Delhi neighborhood where most media houses were headquartered. No newspapers could be printed, and Indians received news of the Emergency the next morning on All India Radio.", "link1": "https://www.bbc.com/news/articles/cn0gnvq72lko", "link2": "https://www.britannica.com/event/the-Emergency-India", "link3": "https://theprint.in/india/governance/43-years-of-emergency-a-timeline-of-events/74568/", "academic": null}, {"no": "1", "sector": "Energy", "incident": "Turkey - Protest against inflation", "date": "April 2022", "description": "Turkey cuts power to opposition leader\u2019s home after protest against high prices", "link1": "https://www.euronews.com/2022/04/21/turkey-cuts-power-to-opposition-leader-s-home-after-protest-against-high-prices", "link2": "https://www.bloomberg.com/news/articles/2022-04-21/turkey-cuts-power-to-opposition-leader-s-home-after-bill-protest", "link3": "https://apnews.com/article/business-europe-middle-east-turkey-kemal-kilicdaroglu-c259249306412558748186e9a6bba7a0", "academic": null}, {"no": "1", "sector": "Energy", "incident": "Risk of Wildfire in Northern California", "date": "June 2026", "description": "Fearing strong winds and heightened wildfire danger, Pacific Gas and Electric Co. expanded its public safety power shutoffs to six additional counties as of Thursday morning, with shutoffs affecting more than 4,400 customers on the last day of Red Flag Warning conditions across much of the Sacramento Valley.", "link1": "https://fox40.com/news/local-news/pge-ponders-power-shutoffs-june/", "link2": "https://www.sacbee.com/news/local/article316092908.html", "link3": "https://www.independent.com/2025/06/16/public-safety-power-shutoff-warning-in-effect/", "academic": null}, {"no": "1", "sector": "Energy", "incident": "Religious Festival", "date": "April 2025", "description": "the state planned temporary shutdowns during Ram Navami and Muharram processions to prevent electrocutions", "link1": "https://www.indiatoday.in/india/law-news/story/jharkhand-to-shut-power-supply-on-ram-navami-to-avoid-electrocution-during-rallies-2704128-2025-04-04", "link2": "https://www.thehindu.com/news/national/jharkhand/sc-permits-jharkhand-to-cut-power-supply-during-ram-navami-processions-to-avoid-electrocution/article69411941.ece", "link3": "https://www.thehindu.com/news/national/jharkhand/sc-permits-jharkhand-to-cut-power-supply-during-ram-navami-processions-to-avoid-electrocution/article69411941.ece", "academic": null}, {"no": "2", "sector": "Water", "incident": "India - Political peaceful protest against irregularities in competitive exams.", "date": "June 2026", "description": "Delhi Police has cut off sanitation facility at Jantar Mantar after Sonam Wangchuk announced his hunger strike. No water connection and hygiene measures", "link1": "https://www.hindustantimes.com/india-news/cjp-alleges-delhi-police-cut-water-sanitation-facilities-at-jantar-mantar-amid-sonam-wangchuks-hunger-strike-101782640758195.html", "link2": "https://timesofindia.indiatimes.com/india/cockroach-janta-party-overnight-protest-abhijeet-dipke-claims-authorities-cut-off-water-electricity-at-jantar-mantar/articleshow/131885624.cms", "link3": "https://thefederal.com/category/states/north/delhi/cjp-alleges-delhi-police-cut-water-supply-after-wangchuk-joins-jantar-mantar-protest-248340", "academic": null}, {"no": "2", "sector": "Water", "incident": "Iran\u2019s Government Cuts Off Water In Kurdish City Amid Protests", "date": "November 2022", "description": "the water supply of the city of Sanandaj, the provincial capital of Iran\u2019s Kordestan province, was shut off as a measure to quash the protests in the city", "link1": "https://www.iranintl.com/en/202211107127", "link2": "https://www.timesofisrael.com/iran-activists-fear-deadly-crackdown-in-kurdish-populated-mahabad/", "link3": "https://understandingwar.org/research/middle-east/iran-crisis-update-november-19/", "academic": null}, {"no": "2", "sector": "Water", "incident": "Water Bottling Plant Shut Off due to serious violation and contamination - Saudi Arabia", "date": "June 2026", "description": "Saudi Arabia's Ministry of Commerce has shut down 12 water bottling plants in Jeddah after inspectors uncovered serious violations that authorities said posed risks to public health.", "link1": "https://gulfnews.com/world/gulf/saudi/saudi-arabia-shuts-12-water-bottling-plants-in-jeddah-over-serious-violations-1.500586010", "link2": "https://www.gulf-insider.com/saudi-arabia-shuts-12-jeddah-water-bottling/", "link3": "https://thesauditimes.net/en/saudi-arabia-shuts-down-12-illegal-water-facilities-in-jeddah-over-serious-violations/", "academic": null}, {"no": "2", "sector": "Water", "incident": "Oil contaminates Iraqi river", "date": "April 2025", "description": "Oil has contaminated an Iraqi river, leaving authorities to suspend water distribution to more than 100,000 people.", "link1": "https://www.yahoo.com/news/government-cuts-off-water-supply-100031635.html", "link2": "https://www.rudaw.net/english/categories/kurdistan/860153", "link3": "https://www.waterkeepersiraq.org/news/urgent-action-required-oil-spillage-in-the-lesser-zab-river", "academic": null}, {"no": "3", "sector": "Food Supply", "incident": "Azad Jammu and Kashmir (AJk) protest in Pakistan", "date": "June 2026", "description": "A nearly two-week standoff between protesters and police in AJK has left residents grappling with food shortages, while the death toll from clashes rose to 24, according to an AFP tally", "link1": "https://www.gulftoday.ae/news/2026/06/20/azad-kashmir-faces-shutdown-as-protests-leave-over-20-dead", "link2": "https://www.businesstoday.in/world/story/58-dead-70000-at-sit-in-trucks-stranded-pakistan-denies-blocking-essentials-to-pok-as-unrest-widens-539068-2026-06-25", "link3": "https://www.arabnews.com/node/2646498/amp", "academic": null}, {"no": "3", "sector": "Food Supply", "incident": "Protest against Sudan Government", "date": "April 2019", "description": "Sudan Government mounts lethal offensive against protesters killing nine, blocking food and water supplies", "link1": "https://www.amnesty.org/en/latest/press-release/2019/04/sudan-government-mounts-lethal-offensive-against-protesters-killing-nine-blocking-food-and-water-supplies/", "link2": "https://www.bbc.com/news/articles/c5yp2v4n1d5o", "link3": "https://www.aljazeera.com/news/2026/4/13/millions-in-war-ravaged-sudan-surviving-on-one-meal-a-day-say-ngos", "academic": null}, {"no": "3", "sector": "Food Supply", "incident": "Irish Pork Recall", "date": "December 2008", "description": "2008 dioxin crisis was caused by the contamination of Irish pork due to contaminated animal feed, which subsequently led to a recall of all Irish pork and bacon products", "link1": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1748-5991.2011.01113.x", "link2": "https://www.tandfonline.com/doi/abs/10.1080/10410236.2015.1050081", "link3": "https://www.rte.ie/news/special-reports/2008/1206/111369-porkrecallinfo/", "academic": null}, {"no": "3", "sector": "Food Supply", "incident": "Dutch Egg Recall", "date": "August 2017", "description": "Millions of eggs removed from European shelves over toxicity fears insecticide fipronil", "link1": "https://www.theguardian.com/world/2017/aug/03/eggs-removed-from-european-shelves-over-toxicity-fears-fipronil", "link2": "https://www.ndtv.com/world-news/egg-scare-costs-dutch-poultry-farmers-33-million-euros-1741302", "link3": "https://www.bbc.com/news/world-europe-40896899", "academic": null}, {"no": "4", "sector": "Transport - Road", "incident": "Farmers Protest against new law", "date": "Februray 2024", "description": "Indian police blocked roads to halt farmers who were marching to New Delhi to press for the better crop prices promised to them in 2021 when thousands of growers camped out on major highways leading to the country's capital.", "link1": "https://www.reuters.com/world/india/indian-police-block-roads-halt-farmers-marching-new-delhi-2024-02-12/", "link2": "https://www.aljazeera.com/news/2024/2/12/indian-police-block-roads-to-halt-farmers-marching-to-new-delhi", "link3": "https://www.thehindu.com/news/national/uttar-pradesh/protesting-farmers-claim-police-blocking-them-from-exiting-villages/article68951417.ece", "academic": null}, {"no": "4", "sector": "Transport - Road", "incident": "Protests in Venezuela", "date": "May 2016", "description": "Authorities blocked roads, held dueling pro-government rallies and shut down almost four miles\u2019 worth of metro stops to keep the opposition from reaching downtown Caracas.", "link1": "https://www.miamiherald.com/news/nation-world/world/americas/venezuela/article78349307.html", "link2": "https://www.nbcnews.com/storyline/venezuela-crisis/venezuela-protests-roads-blocked-anti-maduro-demonstrations-persist-n759516", "link3": "https://apnews.com/article/caracas-protests-workers-delcy-venezuela-e3564d762d1c1951fdfd04f042123128", "academic": null}, {"no": "4", "sector": "Transport - Road", "incident": "Canada Bridges Restricted Access", "date": "April 2019", "description": "Access to Bridges Restricted For Public Safety", "link1": "https://www.saskatchewan.ca/government/news-and-media/2019/april/05/weight-of-bridges-restricted", "link2": "https://www.cbc.ca/news/canada/saskatchewan/sask-government-collapsed-bridge-new-restrictions-1.5087229", "link3": "https://globalnews.ca/news/5145468/weight-restrictions-rural-bridges-saskatchewan/", "academic": null}, {"no": "4", "sector": "Transport - Road", "incident": "Closure of Balnaan Bridge in Scotland", "date": "December 2025", "description": "A spokesperson said continued vehicle use could result in its collapse. The local authority said future funding could support a possible solution.", "link1": "https://www.bbc.com/news/articles/c5yjjedn8w7o", "link2": "https://www.highland.gov.uk/news/article/16949/closure-of-balnaan-bridge-in-badenoch-and-strathspey", "link3": "https://www.pressandjournal.co.uk/fp/business/farming/7003124/strathspey-farmers-balnaan-bridge-closure/", "academic": null}, {"no": "5", "sector": "Transport - Aviation", "incident": "Philippine Anti-Corruption Protest", "date": "September 2025", "description": "The airspace over Rizal Park (Luneta) in Manila and the Edsa Shrine in Quezon City will be off-limits to aircraft and drones from 6am on Sunday (September 21) until 6am Monday (September 22), the Civil Aviation Authority of the Philippines (CAAP) announced on Saturday.\n\n\nThe restriction covers a 15-nautical-mile radius from the two sites, up to an altitude of 10,000 feet, as large-scale anti-corruption protests are set to take place.", "link1": "https://www.khaleejtimes.com/world/asia/philippines-shut-airspace-manila-september-21-protests", "link2": "https://newsinfo.inquirer.net/2112157/caap-luneta-edsa-shrine-no-fly-zones-on-sept-21", "link3": "https://www.gmanetwork.com/news/topstories/metro/959803/caap-issues-flight-restrictions-over-rizal-park-edsa-shrine-for-september-21-protests/story/", "academic": null}, {"no": "5", "sector": "Transport - Aviation", "incident": "Anti-governemnt protest in Belgium", "date": "February 2025", "description": "protest over the new government's planned pension reforms halted all air traffic in the country.", "link1": "https://www.voanews.com/a/anti-government-protest-halts-air-traffic-in-belgium/7973406.html", "link2": "https://www.nytimes.com/2025/02/13/world/europe/brussels-protests-air-traffic.html", "link3": "https://www.yahoo.com/news/anti-government-protest-action-shuts-144820841.html", "academic": null}, {"no": "5", "sector": "Transport - Aviation", "incident": "Denamark Airport Closed - Drone Sightings", "date": "September 2025", "description": "cases of \u201cunauthorized drones over-flying the airport area, breaking airport security, violating the airspace.\u201d", "link1": "https://edition.cnn.com/2025/09/24/europe/denmark-aalborg-airport-closed-drones-latam-intl", "link2": "https://www.nytimes.com/2025/09/25/world/europe/drones-denmark-airport.html", "link3": "https://www.bbc.com/news/articles/c7401vk4lgzo", "academic": null}, {"no": "5", "sector": "Transport - Aviation", "incident": "Reagan Washington National Airport - Bomb Threat", "date": "November 2025", "description": "More than 300 flights or 37 percent of traffic, were delayed at Reagan Airport", "link1": "https://infra.economictimes.indiatimes.com/news/aviation/reagan-airport-operations-resume-after-bomb-threat-disruption/125102074", "link2": "https://www.nytimes.com/2025/11/04/us/reagan-airport-ground-stop.html", "link3": "https://www.thehindu.com/news/international/flights-halted-at-washingtons-reagan-airport-for-a-short-time-after-reported-threat/article70241953.ece", "academic": null}, {"no": "6", "sector": "Healthcare", "incident": "Myanmar shutsdown hospitals for employing protestors", "date": "May 2024", "description": "officials shuttered a hospital in southeast Myanmar for hiring staff who oppose the military regime. Hospitals and other health care facilities have been occupied, raided, and shot at by Myanmar security forces health care workers have been arbitrarily beaten and arrested while providing care; and patients have been arrested while receiving treatment in facilities.", "link1": "https://www.rfa.org/english/news/myanmar/junta-shuts-hospital-05032024061143.html", "link2": "https://phr.org/our-work/resources/one-year-anniversary-of-the-myanmar-coup-detat/", "link3": "https://www.hrw.org/news/2025/04/29/myanmar-junta-assault-health-care-hinders-quake-response", "academic": null}, {"no": "6", "sector": "Healthcare", "incident": "Protests in Iran", "date": "January 2026", "description": "Iranian Agents Obstructed Care at Hospitals Packed with Wounded Protesters", "link1": "https://english.aawsat.com/features/5245416-iranian-agents-obstructed-care-hospitals-packed-wounded-protesters%C2%A0", "link2": "https://apnews.com/article/iran-protests-crackdown-hospitals-326f127b5fef610a89f89e5c164b473c", "link3": "https://www.ptinews.com/detail/international/Iranian-agents-obstructed-care-at-hospitals-packed-with-wounded-protesters/3418779", "academic": null}, {"no": "6", "sector": "Healthcare", "incident": "Kenya - 158 health facilities in Nairobi were closed", "date": "August 2025", "description": "The Kenya Medical Practitioners and Dentists Council (KMPDC) has closed 158 health facilities in Nairobi found to be operating illegally amid concerns of Public Safety", "link1": "https://www.the-star.co.ke/news/2025-08-28-kmpdc-shuts-down-158-health-facilities-in-nairobi", "link2": "https://defrontera.org/features/kenyas-health-ministry-closed-998-health-facilities-defrontera-visited-one-its-still-open", "link3": "https://news.switchtv.ke/2025/05/kmpdu-closes-over-500-health-clinics-in-major-crackdown/", "academic": null}, {"no": "6", "sector": "Healthcare", "incident": "Hospital Shutdown due to Violation of COVID-19 safety rules - Saudi Arabia", "date": "July 2022", "description": "Saudi authorities shut down 74 health facilities for violating COVID-19 safety rules", "link1": "https://www.arabnews.com/node/2126701/saudi-arabia", "link2": null, "link3": null, "academic": null}, {"no": "6", "sector": "Healthcare", "incident": "Man made bomb threat that caused lockdowns at New Jersy Hospital", "date": "April 2026", "description": "Two New Jersey hospitals were placed on lockdown Tuesday after receiving bomb threats over the phone.", "link1": "https://www.nj.com/healthfit/2025/12/police-investigating-bomb-threats-that-temporarily-closed-2-nj-hospitals.html", "link2": "https://www.nj.com/monmouth/2026/04/man-made-bomb-threat-that-caused-lockdowns-at-nj-hospital-and-closed-a-nearby-school-cops-say.html", "link3": "https://dailyvoice.com/nj/toms-river/bomb-threat-placed-tom-river-hospital-into-lockdown-prosecutor/", "academic": null}, {"no": "7", "sector": "Financial", "incident": "Pro-democracy protests in Hong Kong", "date": "September 2014", "description": "Bank branches that offer over-the-counter services have been closed, as well as ATMs and cash deposit machines in affected areas.", "link1": "https://www.wsj.com/articles/hong-kong-banks-hit-by-protests-1411952990", "link2": "https://www.reuters.com/article/world/hong-kong-financial-firms-brace-for-disruptions-as-protests-intensify-idUSKCN0HN0PI/", "link3": "https://www.bbc.com/news/business-29405480", "academic": null}, {"no": "7", "sector": "Financial", "incident": "Bahrain: Banks close offices and stock market shut amid protests.", "date": "March 2011", "description": "HSBC and Standard Chartered have said they are closing all of their branch offices in Bahrain.\n\nThe decision came as the Bahrain stock exchange was shut down because of the country's state of emergency.", "link1": "https://www.bbc.com/news/business-12757954", "link2": "https://www.nytimes.com/2011/03/31/world/middleeast/31iht-m31-bahrain.html", "link3": "https://www.bloomberg.com/news/articles/2011-03-16/bahrain-suspends-stock-market-trading-after-declaring-state-of-emergency", "academic": null}, {"no": "7", "sector": "Financial", "incident": "Nepal Stock Exchange shutdown due to protests", "date": "September 2025", "description": "The Nepal Stock Exchange (NEPSE) has announced that the capital market will remain closed for the entire upcoming week, following a three-day suspension this week due to the ongoing Gen-Z protests.", "link1": "https://nepallaws.com/nepals-capital-market-in-crisis-how-political-turmoil-led-to-trading-suspensions/", "link2": "https://english.khabarhub.com/2025/12/496129/", "link3": "https://www.icfmindia.com/news/nepal-protests-2025-economic-and-stock-market-impact-on-south-asia?utm_source=&utm_medium=", "academic": null}, {"no": "7", "sector": "Financial", "incident": "Terror attacks in 1993 and 2008 - Mumbai India - National Stock Exchange Shut down", "date": "1993 and 2008", "description": "Terror attacks in 1993 and 2008: Two instances when the BSE, NSE were shut", "link1": "https://www.business-standard.com/article/markets/terror-attacks-in-1993-and-2008-two-instances-when-the-bse-nse-were-shut-120032201004_1.html", "link2": "https://mumbaimirror.indiatimes.com/all-quiet-in-the-bse-gullies/articleshow/15989816.html", "link3": "https://www.news18.com/india/target-bse-on-anniversary-of-1993-mumbai-blasts-khalistani-terrorist-pannuns-latest-threat-8724096.html", "academic": null}, {"no": "7", "sector": "Financial", "incident": "Gulf Banks Temporarily Close Branches Amid Escalating Regional Attacks", "date": "March 2026", "description": "Several major banks across the Gulf have temporarily closed branches and offices amid escalating regional tensions, with institutions saying the move is aimed at protecting employees and ensuring safety.", "link1": "https://www.omanmoments.com/gulf-banks-temporarily-close-branches-amid-escalating-regional-attacks-833854.html", "link2": "https://www.thebanker.com/content/c0847003-aa2d-4c4a-92ae-e8714a5f6bb2", "link3": "https://timesofindia.indiatimes.com/world/middle-east/citibank-temporarily-shuts-most-uae-branches-from-march-1214-shifts-staff-to-remote-work/articleshow/129502733.cms", "academic": null}]
+  },
+  3: {
+    tag:"q3", actor:"Other Actors",
+    title:"Quadrant III — Degradation of CNI Value by Other Actors",
+    def:"CNI remains operational, but its value to users is degraded through non-state action.",
+    rows: [{"no": "1", "sector": "Electricity", "incident": "Theft of electricity - Usage of Electricity without metering", "date": "September 2023", "description": "England and Wales - highest levels of electricity theft, peaking at 3,599 thefts in 2021-22. Cannabis farms, cryptocurrency mines and the cost-of-living crisis are being blamed for record levels of electricity thefts", "link1": "https://www.bbc.com/news/uk-england-66847243", "link2": "https://www.theguardian.com/business/2025/apr/22/fight-against-britain-billion-pound-energy-heist", "link3": "https://protos.com/weed-and-crypto-behind-record-electricity-theft-in-england-and-wales/", "academic": null}, {"no": null, "sector": "Electricity", "incident": "Laundering", "date": "Various Incidents.", "description": "Electricity supplied under subsidised agricultural tariffs is diverted to commercial enterprises.", "link1": "To be updated", "link2": "https://www.sciencedirect.com/science/article/pii/S0301421503001824#BIB6 (Electricity theft: a comparative analysis, Journal - Energy Policy)", "link3": null, "academic": null}, {"no": "2", "sector": "Water", "incident": "Illegal Water tapping, illegal water bottling", "date": "Various Incidents.", "description": "India -  Trichy Corportation seizes pumps from four households for illegal water tapping (July 2024).  West Bengal - 20000 incidents of illegal water tapping recorded.", "link1": "https://timesofindia.indiatimes.com/city/trichy/trichy-corporation-cracks-down-on-illegal-water-tapping-with-seizure-of-motor-pumps/articleshow/111673779.cms", "link2": "https://www.telegraphindia.com/west-bengal/20000-cases-of-illegal-water-tapping-public-health-engineering-minister-pulak-roy/cid/2068369", "link3": "https://timesofindia.indiatimes.com/city/kolkata/10-salt-lake-households-caught-stealing-water/articleshow/71158255.cms", "academic": null}, {"no": null, "sector": "Water", "incident": "Illegal Water Use in Agriculture", "date": "July 2025", "description": "England- More than 150 farms in England caught using local water illegally", "link1": "https://www.bbc.com/news/articles/c4g89zwlxggo", "link2": "https://www.thescottishfarmer.co.uk/news/25078479.farmers-warned-crackdown-illegal-water-abstraction/", "link3": "https://naturalworldfund.com/over-150-farms-in-england-caught-using-local-water-illegally/", "academic": null}, {"no": "3", "sector": "Road", "incident": "Illegal Street Racing", "date": "September 2024", "description": "England - Illegal Street Racing Organisers Convicted", "link1": "https://www.bbc.com/news/articles/c17llj55jejo", "link2": "https://www.bbc.com/news/articles/cd6qveyv4ygo", "link3": "https://www.birminghamworld.uk/news/jailed-trio-behind-festivals-of-dangerous-driving-that-caused-chaos-across-birmingham-instagram-fast-and-furious-social-media-chats-4784754", "academic": null}, {"no": null, "sector": "Road", "incident": "For Smuggling and Human Trafficking", "date": "Various Incidents", "description": "United States - Various Incidents", "link1": "https://www.cbsnews.com/colorado/news/colorado-highways-used-daily-for-human-smuggling/", "link2": "https://www.cbsnews.com/losangeles/news/feds-border-patrol-checkpoints-on-socal-freeways-to-curb-trafficking/", "link3": "https://www.foxnews.com/us/criminal-networks-exploit-us-interstates-make-human-trafficking-victims-vanish-real-plague", "academic": null}, {"no": null, "sector": "Road", "incident": "Extortion", "date": "July 2026", "description": "Nigeria - Delta State Police Command has arrested nine suspects during a statewide operation targeting illegal roadblocks and unauthorized revenue collection on major highways across the state.", "link1": "https://www.tvcnews.tv/delta-police-arrest-nine-in-crackdown-on-illegal-roadblocks-highway-extortion/", "link2": "https://thenationonlineng.net/delta-police-arrest-nine-in-crackdown-on-illegal-roadblocks-highway-extortion", "link3": "https://punchng.com/nine-arrested-in-delta-crackdown-on-highway-extortion/", "academic": null}, {"no": "4", "sector": "Healthcare", "incident": "Reimbursement Fraud", "date": "June 2025", "description": "United States - Fifteen individuals, including two pharmacists, have been charged for their participation in schemes in which the Medicare and Medicaid programs, and other health care benefit programs, were fraudulently billed more than $10.6 billion.", "link1": "https://www.justice.gov/usao-edny/pr/11-defendants-indicted-multi-billion-health-care-fraud-scheme-largest-case-loss-amount", "link2": "https://www.washingtonpost.com/health/2025/06/30/health-care-fraud-bust-largest-in-us-history/", "link3": "https://www.aljazeera.com/economy/2026/6/23/the-3-7bn-man-inside-one-of-americas-biggest-medicare-frauds", "academic": null}, {"no": null, "sector": "Healthcare", "incident": "Prescription Fraud", "date": "January 2020", "description": "United States - Mr. Fuller was identified as a ring leader who manufactured and produced fraudulent prescriptions to multiple states, to include, Indiana, Illinois, Michigan, and Wisconsin. Throughout the course of this investigation, agents identified numerous physicians that Mr. Fuller victimized so he and his associates could illegally obtain oxycodone, Adderall, and promethazine with codeine from pharmacies throughout the United States.", "link1": "https://www.dea.gov/press-releases/2020/01/30/leader-prescription-fraud-ring-sentenced-over-three-years-federal-prison", "link2": null, "link3": null, "academic": null}, {"no": null, "sector": "Healthcare", "incident": "Prescription Fraud", "date": "October 2017", "description": "United States - The billionaire owner of Insys Therapeutics was arrested Thursday and charged with leading a nationwide conspiracy to use bribes and fraud to cause the illegal distribution of a Fentanyl spray intended for cancer patients.", "link1": "https://www.richardhollawell.com/billionaire-charged-with-bribing-doctors-to-prescribe-opioids/", "link2": "https://www.nbcnews.com/storyline/americas-heroin-epidemic/billionaire-charged-bribing-doctors-prescribe-opioids-n814686", "link3": "https://www.justice.gov/usao-ma/pr/founder-and-owner-pharmaceutical-company-insys-arrested-and-charged-racketeering", "academic": null}, {"no": "5", "sector": "Financial Institutions", "incident": "Illegal Siphoning of funds", "date": "1992.0", "description": "India - Harshad Mehta Scam 1992, illegally siphoning off crores of funds of the institutions for speculative returns by systemic and deliberate abuse of the system", "link1": "https://timesofindia.indiatimes.com/city/mumbai/24-years-on-harshad-mehtas-brother-5-others-convicted-of-rs-700-crore-fraud/articleshow/55673546.cms", "link2": "https://timesofindia.indiatimes.com/city/mumbai/25-years-on-harshad-mehta-scam-recovery-continues/articleshow/58664818.cms", "link3": "https://www.indiatoday.in/business/story/harshad-mehta-securities-scam-india-legacy-of-bank-fraud-1733374-2020-10-20", "academic": null}, {"no": null, "sector": "Financial Institutions", "incident": "Ponzi Scheme", "date": null, "description": "United States - Pyramid Scheme", "link1": "https://postalmuseum.si.edu/exhibition/behind-the-badge-case-histories-scams-and-schemes/ponzi-scheme", "link2": "https://www.archives.gov/publications/prologue/2010/summer/ponzi-inmate-case-file", "link3": "https://www.ebsco.com/research-starters/history/charles-ponzi", "academic": null}, {"no": "6", "sector": "Internet", "incident": "Digital Arrest", "date": "Multiple Incidents", "description": "India -", "link1": "https://www.bbc.com/news/articles/clydllln9lgo", "link2": "https://www.hindustantimes.com/india-news/seven-held-in-rs-58-crore-digital-arrest-case-fraudsters-used-over-6-500-mule-accounts-101760697888658.html", "link3": "https://timesofindia.indiatimes.com/city/delhi/60-cbi-teams-raid-80-locations-in-16-states-arrest-key-operatives-of-digital-arrest-scam/articleshow/132000642.cms", "academic": null}, {"no": null, "sector": "Internet", "incident": "Illegal Online MarketPlace", "date": "Januray 2021", "description": "The online marketplace Dark Market and Wall Street market are the world's largest dark web market, enabling the trade in drugs (including cocaine, heroin, cannabis and amphetamines), stolen data, fake documents and malicious software. The illegal platform was exclusively accessible via the Tor network in the so-called Darknet and aimed at international trade in criminal goods.", "link1": "https://www.europol.europa.eu/media-press/newsroom/news/double-blow-to-dark-web-marketplaces", "link2": "https://www.europol.europa.eu/media-press/newsroom/news/darkmarket-worlds-largest-illegal-dark-web-marketplace-taken-down", "link3": "https://indianexpress.com/article/world/largest-illegal-darknet-marketplace-darkmarket-taken-offline-7143638/", "academic": null}, {"no": null, "sector": "Internet", "incident": "Radicalisation and Terrorist Recruitment", "date": "Multiple Incidents", "description": "Various Countries", "link1": "https://www.cbc.ca/news/science/terrorist-groups-recruiting-through-social-media-1.1131053", "link2": "https://theprint.in/india/shahzad-bhattis-north-india-web-how-isi-linked-handlers-radicalise-recruit-all-through-social-media/2963000/", "link3": "https://cybernews.com/cybercrime/extremists-recruiting-internet-users/", "academic": null}]
+  },
+  4: {
+    tag:"q4", actor:"Other Actors",
+    title:"Quadrant IV — Degradation of CNI Availability by Other Actors",
+    def:"CNI access is degraded or denied through non-state action.",
+    rows: [{"no": "1", "sector": "Electricity", "incident": "Theft of Infrastructure", "date": "Multiple Instances", "description": "India - Theft of power transmission cables, towers", "link1": "https://www.thehindubusinessline.com/specials/clean-tech/power-transmission-towers-toppled-by-theft-and-sabotage/article69780428.ece", "link2": "https://timesofindia.indiatimes.com/city/aurangabad/two-electrocuted-while-attempting-to-steal-cables-from-power-tower-in-beed/articleshow/129910037.cms", "link3": "https://www.easternmirrornagaland.com/another-power-transmission-tower-collapses-in-nagaland-due-to-theft", "academic": null}, {"no": "1", "sector": "Electricity", "incident": "Vandalism", "date": "December 2023", "description": "Nigeria - The Transmission Company of Nigeria, TCN, had at the weekend disclosed that vandals destroyed two transmission towers supplying electricity to parts of the North East, leaving Borno and Yobe without supply.", "link1": "https://www.vanguardngr.com/2023/12/attacks-on-power-towers-deliberate-act-of-sabotage-fg/", "link2": "https://www.premiumtimesng.com/business/business-news/781233-electricity-theft-infrastructure-vandalism-threaten-nigerias-power-sector.html", "link3": "https://punchng.com/tcn-foils-vandalism-attempt-at-bauchi-substation-recovers-vehicle-equipment/", "academic": null}, {"no": "1", "sector": "Electricity", "incident": "Bombing", "date": "December 2025", "description": "United States - A Bay Area engineer who was convicted of blowing up Pacific Gas & Electric Co. transformers in the San Jose area been sentenced to a decade in federal prison", "link1": "https://www.cbsnews.com/sanfrancisco/news/pge-transformer-bombings-san-jose-engineer-10-years-federal-prison/", "link2": "https://www.justice.gov/opa/pr/engineer-sentenced-10-years-prison-bombings-pge-transformers-causing-property-damage-and", "link3": "https://www.sfgate.com/news/bayarea/article/sj-man-sentenced-to-10-years-in-prison-for-21248455.php", "academic": null}, {"no": "2", "sector": "Water", "incident": "Israel-Palestine Conflict", "date": "December 2024", "description": "Human Rights Watch has accused Israel of committing \u201cacts of genocide\u201d by denying clean water to Palestinians in Gaza, and called on the international community to impose targeted sanctions.", "link1": "https://www.aljazeera.com/news/2024/12/19/israel-committing-acts-of-genocide-by-cutting-off-water-in-gaza-hrw-says", "link2": "https://www.hrw.org/news/2023/11/16/israeli-authorities-cutting-water-leading-public-health-crisis-gaza", "link3": "https://www.arabnews.com/node/2643352/middle-east", "academic": null}, {"no": "2", "sector": "Water", "incident": "India-Pakistan Conflict", "date": "June 2026", "description": "India is working to stop water from flowing into its neighbour Pakistan after suspending a major river-sharing treaty between the two Asian rivals", "link1": "https://www.independent.co.uk/asia/india/india-pakistan-indus-water-treaty-modi-b2993159.html", "link2": "https://www.thehindu.com/news/national/pakistan-accuses-india-of-weaponising-water-after-treaty-suspension/article71061151.ece", "link3": "https://www.reuters.com/world/asia-pacific/panic-pakistan-india-vows-cut-off-water-supply-over-kashmir-2025-04-27/", "academic": null}, {"no": "3", "sector": "Transport - Rail", "incident": "Blockade", "date": "September 2025", "description": "India - More than 100 passenger trains were cancelled, diverted or short-terminated on Saturday as a rail blockade by Kurmis is underway at various stations", "link1": "https://www.hindustantimes.com/india-news/over-100-trains-cancelled-diverted-short-terminated-due-to-kurmis-agitation-in-jkhand-101758381538289.html", "link2": "https://indianexpress.com/article/cities/kolkata/21-trains-stranded-many-others-cancelled-in-west-bengal-as-kurmi-reignite-protest-for-st-status-10261196/", "link3": "https://newsonair.gov.in/indefinite-rail-roko-movement-called-by-kurmi-community-begins-in-jharkhand/", "academic": null}, {"no": "3", "sector": "Transport - Rail", "incident": "Vandalism", "date": "June 2022", "description": "India - Protesters vandalise train infrastructure worth Rs 700 crores ($83.8 million USD)", "link1": "https://www.ndtv.com/india-news/agnipath-protest-2-coaches-of-passenger-train-set-on-fire-by-mob-in-bihar-3074583", "link2": "https://www.indiatoday.in/india/story/agnipath-protests-railway-property-damaged-bihar-1964060-2022-06-18", "link3": "https://timesofindia.indiatimes.com/india/violent-protests-against-centres-agnipath-scheme-rage-across-nation-key-developments/articleshow/92274419.cms", "academic": null}, {"no": "3", "sector": "Transport - Rail", "incident": "Bombing", "date": "Multiple Incidents", "description": "Pakistan", "link1": "https://www.newindianexpress.com/world/2025/Jun/16/traffic-suspended-after-blast-damages-important-railway-link-in-pakistans-balochistan", "link2": "https://www.thehindu.com/news/international/pakistan-train-bombing-kills-more-than-30-people-official-says/article71021242.ece", "link3": "https://www.abc.net.au/news/2026-05-24/pakistan-railway-blast/106716230", "academic": null}, {"no": "4", "sector": "Food Supply", "incident": "Hoarding", "date": "October 2016", "description": "Taiwan - Taiwanese man detained on suspicion of hoarding 300 tonnes of carrots", "link1": "https://www.theguardian.com/world/2016/oct/28/taiwan-man-arrested-hoarding-300-tonnes-carrots-kaohsiung", "link2": "https://www.ndtv.com/offbeat/vegging-out-taiwan-man-detained-over-hoarding-300-tonnes-of-carrots-1585219", "link3": "https://www.dw.com/en/when-carrot-hoarding-is-a-problem/a-36181289", "academic": null}, {"no": "4", "sector": "Food Supply", "incident": "Hoarding", "date": "March April May 2026", "description": "India - Multiple Incidents - Fabricated LPG shortage narrative fuels black-market cylinder sales", "link1": "https://www.thehindu.com/news/cities/Hyderabad/fabricated-lpg-shortage-narrative-fuels-black-market-cylinder-sales-across-hyderabad/article70951676.ece", "link2": "https://www.ndtv.com/india-news/in-black-market-lpg-cylinder-selling-for-rs-6-500-refill-for-rs-4-000-11217265", "link3": "https://indianexpress.com/article/cities/bangalore/karnataka-lpg-shortage-gas-hoarding-arrest-kengeri-cylinder-black-market-10583198/", "academic": null}, {"no": "4", "sector": "Food Supply", "incident": "Cyberattack disrupts food supply chain", "date": "July 2026", "description": "Japan - A cyberattack on Japanese frozen food and cold storage company Nichirei has disrupted deliveries across Japan, affecting restaurants, supermarkets and food manufacturers that rely on the company's refrigerated logistics network", "link1": "https://www.salmonbusiness.com/nichirei-cyberattack-sends-shockwaves-through-japans-food-supply-chain/", "link2": "https://www.rescana.com/post/nichirei-cyberattack-analysis-ransomhouse-extortion-disrupts-japan-s-largest-frozen-food-logistics-network", "link3": "https://www.cpomagazine.com/cyber-security/cyber-attack-on-major-japanese-refrigerated-logistics-provider-disrupts-kfc-and-other-food-chains/#google_vignette", "academic": null}, {"no": "4", "sector": "Food Supply", "incident": "Cyberattack disrupts food supply chain", "date": "May 2025", "description": "United Kingdom - Cold chain services provider Peter Green Chilled, which supplies the likes of Aldi, Sainsbury\u2019s and Tesco, has been forced to halt operations after succumbing to a ransomware attack", "link1": "https://www.bbc.com/news/articles/czr88myp570o", "link2": "https://www.computerweekly.com/news/366624212/Retail-cyber-attacks-hit-food-distributor-Peter-Green-Chilled", "link3": "https://insight.scmagazineuk.com/frozen-food-supplier-hit-by-ransomware", "academic": null}, {"no": "4", "sector": "Food Supply", "incident": "Arson-style attack on warehouse", "date": "April 2026", "description": "United States - A man is facing federal charges for allegedly purposely setting the fire that destroyed a massive warehouse in Southern California", "link1": "https://abcnews.com/US/man-facing-federal-charges-allegedly-setting-massive-fire/story?id=131920421", "link2": "https://www.nbcnews.com/news/us-news/arson-suspect-california-warehouse-fire-allegedly-compared-luigi-mangi-rcna273704", "link3": "https://www.justice.gov/usao-cdca/pr/inland-empire-man-federally-charged-deliberately-setting-fires-destroyed-massive", "academic": null}, {"no": "5", "sector": "Financial Institution", "incident": "Attack on cash machines using explosives", "date": "October 2024", "description": "Europe - In the early hours of 16 October 2024, Dutch, French, and German police forces arrested three members of a violent criminal network that carried out attacks on cash machines using explosives.", "link1": "https://www.europol.europa.eu/media-press/newsroom/news/gang-behind-atm-attacks-taken-down", "link2": "https://edition.cnn.com/2024/10/27/europe/criminals-atm-robberies-europe-intl", "link3": "https://www.association-secure-transactions.eu/europol-leads-takedown-of-violent-atm-crime-gang/", "academic": null}, {"no": "5", "sector": "Financial Institution", "incident": "Attack on cash machines", "date": "January 2019", "description": "India - Gang that looted \u20b913 crore from 160 ATMs in 7 states busted in Haryana", "link1": "https://timesofindia.indiatimes.com/city/chandigarh/haryana-police-bust-atm-robbers-gang-5-arrested/articleshow/73259763.cms", "link2": "https://www.hindustantimes.com/india-news/gang-that-looted-100-atms-in-seven-states-busted-one-killed/story-tQ9w6SsrsXywUCmBvFZPkO.html", "link3": "https://www.thehindu.com/news/cities/chennai/atm-robbery-gang-caught-in-namakkal-are-from-palwal-in-haryana/article68694203.ece", "academic": null}, {"no": "5", "sector": "Financial Institution", "incident": "Ransomware attack", "date": "July 2024", "description": "India - A ransomware attack on a technology service provider has forced payment systems across nearly 300 small Indian local banks to shut down temporarily", "link1": "https://www.reuters.com/technology/cybersecurity/ransomware-attack-forces-hundreds-small-indian-banks-offline-sources-say-2024-07-31/", "link2": "https://www.thehindu.com/sci-tech/technology/customers-at-several-small-sized-banks-affected-as-tech-provider-c-edge-suffers-ransomware-attack/article68470198.ece", "link3": "https://www.ndtv.com/india-news/ransomware-attack-on-tech-service-provider-shuts-down-payment-systems-of-300-small-banks-across-india-news-agency-reuters-6234160", "academic": null}]
+  }
+};
+
+function esc(s){
+  if(s===null||s===undefined) return "";
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+const urlRe = /(https?:\/\/[^\s]+)/g;
+
+// Renders a raw cell (link or academic-article text) by auto-linking any URL
+// found in it, showing the URL in full so readers can verify the source domain.
+function linkifyCell(raw){
+  if(!raw) return '<span class="cell-dash">—</span>';
+  const parts = [];
+  let lastIndex = 0;
+  let m;
+  urlRe.lastIndex = 0;
+  let foundUrl = false;
+  while((m = urlRe.exec(raw)) !== null){
+    foundUrl = true;
+    const before = raw.slice(lastIndex, m.index).trim();
+    if(before) parts.push(`<span class="link-note">${esc(before)}</span>`);
+    let url = m[0].replace(/[),.;]+$/, '');
+    parts.push(`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(url)}</a>`);
+    lastIndex = m.index + url.length;
+  }
+  const tail = raw.slice(lastIndex).trim();
+  if(tail) parts.push(`<span class="link-note">${esc(tail)}</span>`);
+  if(!foundUrl) return `<span class="link-note" style="font-style:normal;color:var(--ink-soft);">${esc(raw)}</span>`;
+  return parts.join('');
+}
+
+function groupBySector(rows){
+  const order = [];
+  const map = {};
+  rows.forEach(r => {
+    const s = r.sector || "Other";
+    if(!map[s]){ map[s]=[]; order.push(s); }
+    map[s].push(r);
+  });
+  return order.map(s => ({sector:s, items:map[s]}));
+}
+
+function buildTableRows(items, groupIndex, hasAcademic){
+  return items.map((r, i) => `
+    <tr>
+      <td class="c-no">${groupIndex}.${i+1}</td>
+      <td class="c-sector">${esc(r.sector)}</td>
+      <td class="c-incident">${esc(r.incident)}</td>
+      <td class="c-date">${esc(r.date) || '<span class="cell-dash">—</span>'}</td>
+      <td class="c-desc">${esc(r.description)}</td>
+      <td class="c-link">${linkifyCell(r.link1)}</td>
+      <td class="c-link">${linkifyCell(r.link2)}</td>
+      <td class="c-link">${linkifyCell(r.link3)}</td>
+      ${hasAcademic ? `<td class="c-academic">${linkifyCell(r.academic)}</td>` : ''}
+    </tr>
+  `).join('');
+}
+
+function renderPane(qnum){
+  const q = QUADRANTS[qnum];
+  if(!q.rows || q.rows.length === 0){
+    return `
+    <div class="quad-head">
+      <p class="quad-title">${esc(q.title)}</p>
+      <p class="quad-def">${esc(q.def)}</p>
+    </div>
+    <div class="empty-state">
+      <p class="serif">Cases for this quadrant have not yet been added to the appendix.</p>
+    </div>`;
+  }
+
+  const hasAcademic = q.rows.some(r => r.academic);
+  const groups = groupBySector(q.rows);
+  const groupTables = groups.map((g, gi) => `
+    <div class="sector-block">
+      <p class="table-caption">${esc(g.sector)}</p>
+      <div class="table-scroll">
+        <table class="appendix">
+          <thead>
+            <tr>
+              <th>No.</th><th>Sector</th><th>Incident</th><th>Date</th>
+              <th>Description</th><th>Link 1</th><th>Link 2</th><th>Link 3</th>
+              ${hasAcademic ? '<th>Academic Articles</th>' : ''}
+            </tr>
+          </thead>
+          <tbody>${buildTableRows(g.items, gi+1, hasAcademic)}</tbody>
+        </table>
+      </div>
+    </div>
+  `).join('');
+
+  return `
+    <div class="quad-head">
+      <p class="quad-title">${esc(q.title)}</p>
+      <p class="quad-def">${esc(q.def)}</p>
+    </div>
+    ${groupTables}
+  `;
+}
+
+function build(){
+  document.getElementById('main').innerHTML = [1,2,3,4].map(n =>
+    `<div class="pane ${n===1?'active':''}" data-pane="${n}">${renderPane(n)}</div>`
+  ).join('');
+}
+
+function activate(qnum){
+  document.querySelectorAll('.navtab').forEach(t => t.classList.toggle('active', t.dataset.q === String(qnum)));
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('active', p.dataset.pane === String(qnum)));
+  window.scrollTo({top: document.querySelector('.navbar-shell').offsetTop - 2, behavior:'smooth'});
+}
+
+document.querySelectorAll('.navtab').forEach(t => t.addEventListener('click', () => activate(t.dataset.q)));
+document.querySelectorAll('[data-jump]').forEach(el => el.addEventListener('click', () => activate(el.dataset.jump)));
+
+build();
+</script>
+</body>
+</html>
